@@ -3,15 +3,17 @@
 """
 Created on Wed Jul 22 15:21:37 2020
 
-@author: akhorgad
+@author: Akanksha Khorgade
+@contact: akhorgad@broadinstitute.org
 """
 
-#Creating a RealMcCoil inoput format from 012 file with positional pruning
+#Creating a RealMcCoil input format from 012 file with positional pruning 
+#or selecting on chromosomal positions 
+#or selecting on individuals
 
-######### Changes made from vcftools 
-#------remove the logic for pruning windows - LD pruning
-#------take a list of chromosomal positions to filter the o/p on
-#------take a list of sample ids to filter th o/p on
+######### Changes made from vcftoolsto012.py 
+#------takes a list of chromosomal positions to filter the o/p on
+#------additionally, takes a list of sample ids to filter th o/p on
 #------return a file with the rest of the logic as it is but slected on postions and individuals
 
 
@@ -105,7 +107,7 @@ def addPositionsAndSampleIds(o12_df, pos_f, indv_f):
     o12_df.index=list(indv_df['indv'])
     return(o12_df)
 
-#process 3.2
+#process 3.2- if window_size in args
 #prunes the o12 dataframe for LD to keep the selected SNP's 
 def selectSNP(filtered_chr_pos_df, o12_df, freq_df):
     o12_transposed=o12_df.transpose()
@@ -124,7 +126,7 @@ def selectSNP(filtered_chr_pos_df, o12_df, freq_df):
     freq_selected_df=freq_selected_df.drop(columns=[0])
     return(o12_selectSNP_df,freq_selected_df)
 
-#process 3.2-alternate
+#process 3.2- if selectSNP in args
 #optionally - prunes the o12 dataframe to keep the selected SNP's 
 def selectSNPfromFile(select_pos_f, o12_df, freq_df):
     o12_transposed=o12_df.transpose()
@@ -144,8 +146,8 @@ def selectSNPfromFile(select_pos_f, o12_df, freq_df):
     return(o12_selectSNP_df, freq_selected_df)
 
 
-#process 3.2-alt
-#optionally - prunes the o12 dataframe to keep the selected individual's 
+#process 3.2- if selectIndv in args
+#optionally - prunes the o12 dataframe to keep the selected individuals 
 def selectIndv(select_indv_f, o12_selected_df): 
     with open(select_indv_f) as f:
         selectIndv_list = [line.rstrip() for line in f]
