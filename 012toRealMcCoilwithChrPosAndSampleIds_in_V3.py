@@ -11,7 +11,7 @@ Created on Wed Jul 22 15:21:37 2020
 #or selecting on chromosomal positions 
 #or selecting on individuals
 
-######### Changes made from vcftoolsto012.py 
+######### Changes made from vcftools012toRealMcCoil_in.py 
 #------takes a list of chromosomal positions to filter the o/p on
 #------additionally, takes a list of sample ids to filter th o/p on
 #------return a file with the rest of the logic as it is but slected on postions and individuals
